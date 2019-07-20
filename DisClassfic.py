@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from scipy.io import arff
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 data=arff.loadarff('DataSets\Autism-Adolescent-Data.arff')
 df=pd.DataFrame(data[0])
@@ -33,6 +34,12 @@ X_train,X_test,y_train,y_test=train_test_split(df2,yVar,test_size=0.2)
 
 # Build A random Forest 
 
-clf=RandomForestClassifier(n_estimators=100,n_jobs=-1, random_state=0)
+clf=RandomForestClassifier(n_estimators=10,n_jobs=-1, random_state=0)
 clf.fit(X_train,y_train)
 
+# Predict
+preds=clf.predict(X_test)
+
+print (pd.crosstab(y_test, preds, rownames=['Actual Result'], colnames=['Predicted Result']))
+
+print(list(zip(X_train, clf.feature_importances_)))
