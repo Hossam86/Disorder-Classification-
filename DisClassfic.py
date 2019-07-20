@@ -15,3 +15,6 @@ df.replace('yes',1)
 df.replace('no',0)
 df.replace('f',1)
 df.replace('m',0)
+
+# subset the data
+xVar=list(df.loc[:,'A1_Score':'A10_Score'])+['gender']+['jundice']+['austim']
